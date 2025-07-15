@@ -1,18 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import WebApp from "@twa-dev/sdk";
+import { useState } from "react";
 
 export default function Home() {
-    const [username, setUsername] = useState<string | null>(null);
-
-    useEffect(() => {
-        WebApp.ready();
-        const user = WebApp.initDataUnsafe?.user;
-        if (user) {
-            setUsername(user.first_name);
-        }
-    }, []);
+    const [username] = useState<string | null>(null);
 
     return (
         <main className="flex min-h-screen flex-col items-center justify-center p-4">
