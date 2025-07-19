@@ -7,15 +7,17 @@ async function ServicesMainPage() {
         { cache: "no-store" }
     );
 
-    const services: ProductsType = await data.json();
-    console.log(services);
+    const message: { message: string } = await data.json();
+
+    // const services: ProductsType = await data.json();
+    // console.log(services);
 
     return (
         <main className="flex min-h-screen flex-col items-center justify-around px-4 py-8 bg-gradient-to-b from-white to-blue-50">
             <h1 className="text-3xl font-bold text-blue-700 text-center mb-10">
-                Выбрать массаж
+                {message.message}
             </h1>
-            {services.products.length !== 0 &&
+            {/* {services.products.length !== 0 &&
                 services.products.map((elem) => (
                     <ServiceCardForMainPage
                         key={elem._id}
@@ -25,7 +27,7 @@ async function ServicesMainPage() {
                         duration={elem.duration}
                         linkForTransition={`/services/${elem._id}`}
                     />
-                ))}
+                ))} */}
         </main>
     );
 }
