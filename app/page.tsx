@@ -1,18 +1,30 @@
-"use client";
-
-import { useState } from "react";
+import { configForHomePage } from "../config/configForHomePage";
+import Image from "next/image";
+import NavigationButton from "@/UIComponents/NavigationButton";
 
 export default function Home() {
-    const [username] = useState<string | null>(null);
-
     return (
-        <main className="flex min-h-screen flex-col items-center justify-center p-4">
-            <h1 className="text-2xl font-bold mb-4">Добро пожаловать!</h1>
-            {username ? (
-                <p>Привет, {username} 👋</p>
-            ) : (
-                <p>Ожидаем данные от Telegram...</p>
-            )}
+        <main className="flex min-h-screen flex-col items-center justify-around px-4 py-8 bg-gradient-to-b from-white to-blue-50">
+            <h1 className="text-3xl font-bold text-blue-700 mb-4 text-center">
+                {configForHomePage.title}
+            </h1>
+
+            <Image
+                src={configForHomePage.image}
+                width={220}
+                height={275}
+                alt="аватар"
+                className="rounded-xl shadow-lg mb-6"
+            />
+
+            <p className="text-lg text-gray-700 text-center mb-6 max-w-md">
+                {configForHomePage.description}
+            </p>
+
+            <NavigationButton
+                text={configForHomePage.textForButton}
+                customAction={configForHomePage.linkForButton}
+            />
         </main>
     );
 }
