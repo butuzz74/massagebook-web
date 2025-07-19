@@ -8,7 +8,6 @@ async function ServicesMainPage() {
     );
 
     const services: ProductsType = await data.json();
-    console.log(services);
 
     return (
         <main className="flex min-h-screen flex-col items-center justify-around px-4 py-8 bg-gradient-to-b from-white to-blue-50">
