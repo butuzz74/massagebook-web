@@ -6,7 +6,7 @@ if (!MONGODB_URI) {
     throw new Error("❌ Ошибка: переменная окружения MONGODB_URI не задана!");
 }
 
-let cached = (global as any).mongoose || { conn: null, promise: null };
+const cached = (global as any).mongoose || { conn: null, promise: null };
 
 export async function connectDB() {
     if (cached.conn) {
