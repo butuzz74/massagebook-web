@@ -13,7 +13,7 @@ export default function DatePicker({ workdays }: { workdays: WorkDay[] }) {
     const [availableDays, setAvailableDays] = useState<Date[] | null>(null);
     const [selected, setSelected] = useState<Date | undefined>();
     const [availableTimes, setAvailableTimes] = useState<string[] | null>(null);
-    const { setBookingField, telegramId } = useBookingStore();
+    const { setBookingField } = useBookingStore();
 
     const handleSelect = (date: Date | undefined) => {
         setSelected(date);
@@ -66,9 +66,7 @@ export default function DatePicker({ workdays }: { workdays: WorkDay[] }) {
 
     return (
         <div className="p-4 flex flex-col items-center">
-            <h2 className="text-xl font-semibold mb-4">
-                Выберите дату: {telegramId ? telegramId : "Do not telegramId"}
-            </h2>
+            <h2 className="text-xl font-semibold mb-4">Выберите дату:</h2>
             {availableDays ? (
                 <DayPicker
                     mode="single"

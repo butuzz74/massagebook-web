@@ -1,17 +1,16 @@
 "use client";
 
 import React from "react";
-import { useRouter } from "next/navigation";
 import { useBookingStore } from "@/store/bookingStore";
 import NavigationButton from "@/UIComponents/NavigationButton";
 import { BookingData } from "@/types/types";
+import WebApp from "@twa-dev/sdk";
 
 export const BookingSummaryCard = ({
     handleSendBooking,
 }: {
     handleSendBooking: (data: BookingData) => void;
 }) => {
-    const router = useRouter();
     const { massageId, massage, date, time, name, phone } = useBookingStore();
 
     return (
@@ -52,7 +51,12 @@ export const BookingSummaryCard = ({
                         name,
                         phone,
                     });
-                    router.push("/");
+                    if (WebApp?.sendData) {
+                        WebApp.sendData(
+                            JSON.stringify({ massage, date, time, name, phone })
+                        );
+                    }
+                    WebApp.close();
                 }}
             />
         </div>
