@@ -2,7 +2,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useBookingStore } from "@/store/bookingStore";
-import { useEffect } from "react";
 
 const ServiceCardOneForServiceIdPage = ({
     image,
@@ -18,16 +17,6 @@ const ServiceCardOneForServiceIdPage = ({
     id: string;
 }) => {
     const { setBookingField } = useBookingStore();
-
-    useEffect(() => {
-        if (
-            typeof window !== "undefined" &&
-            window.Telegram?.WebApp?.initDataUnsafe?.user
-        ) {
-            const telegramId = window.Telegram.WebApp.initDataUnsafe.user.id;
-            setBookingField("telegramId", telegramId);
-        }
-    }, [setBookingField]);
 
     const handleSaveService = (id: string, service: string) => {
         setBookingField("massageId", id);
