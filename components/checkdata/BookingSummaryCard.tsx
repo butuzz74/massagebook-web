@@ -12,7 +12,7 @@ export const BookingSummaryCard = ({
     handleSendBooking: (data: BookingData) => void;
 }) => {
     const { massageId, massage, date, time, name, phone } = useBookingStore();
-    const webAppRef = useRef<any>(null);
+    const webAppRef = useRef<typeof window.Telegram.WebApp | null>(null);
 
     useEffect(() => {
         if (typeof window !== "undefined" && window.Telegram?.WebApp) {
