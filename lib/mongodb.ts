@@ -1,14 +1,23 @@
-import mongoose from "mongoose";
+import mongoose, { Mongoose } from "mongoose";
 
 const MONGODB_URI = process.env.MONGODB_URI as string;
 
 if (!MONGODB_URI) {
     throw new Error("❌ Ошибка: переменная окружения MONGODB_URI не задана!");
 }
+interface MongooseGlobal {
+    conn: Mongoose | null;
+    promise: Promise<Mongoose> | null;
+}
+declare global {
+    var mongoose: MongooseGlobal | undefined;
+}
 
-const cached = (global as any).mongoose || { conn: null, promise: null };
+const cached = global.mongoose || { conn: null, promise: null };
 
-export async function connectDB() {
+global.mongoose = cached;
+
+export async function connectDB(): Promise<Mongoose> {
     if (cached.conn) {
         console.log("✅ Используем кэшированное подключение к MongoDB");
         return cached.conn;
