@@ -1,8 +1,9 @@
+"use client";
+
 import { BookingData } from "@/types/types";
 import { BookingSummaryCard } from "@/components/checkdata/BookingSummaryCard";
 
 const handleSendBooking = async (data: BookingData) => {
-    "use server";
     try {
         const res = await fetch(
             `${process.env.NEXT_PUBLIC_BASE_URL}/api/checkdata`,
