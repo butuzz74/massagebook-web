@@ -51,12 +51,12 @@ export const BookingSummaryCard = ({
                         name,
                         phone,
                     });
-                    // if (WebApp?.sendData) {
-                    //     WebApp.sendData(
-                    //         JSON.stringify({ massage, date, time, name, phone })
-                    //     );
-                    // }
-                    // WebApp.close();
+                    if (WebApp?.sendData) {
+                        WebApp.sendData(
+                            JSON.stringify({ massage, date, time, name, phone })
+                        );
+                    }
+                    WebApp.close();
                 }}
             />
         </div>

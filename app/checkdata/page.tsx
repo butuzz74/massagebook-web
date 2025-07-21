@@ -1,5 +1,6 @@
 "use client";
 import Script from "next/script";
+import { useEffect } from "react";
 import { BookingData } from "@/types/types";
 import { BookingSummaryCard } from "@/components/checkdata/BookingSummaryCard";
 
@@ -20,6 +21,11 @@ const handleSendBooking = async (data: BookingData) => {
     }
 };
 function CheckDataPage() {
+    useEffect(() => {
+        if (typeof window !== "undefined" && window.Telegram?.WebApp) {
+            window.Telegram.WebApp.expand(); // пример взаимодействия
+        }
+    }, []);
     return (
         <>
             <Script
