@@ -2,6 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useBookingStore } from "@/store/bookingStore";
+import { useEffect } from "react";
 
 const ServiceCardOneForServiceIdPage = ({
     image,
@@ -18,11 +19,15 @@ const ServiceCardOneForServiceIdPage = ({
 }) => {
     const { setBookingField } = useBookingStore();
 
-    const tgUser = window.Telegram?.WebApp?.initDataUnsafe?.user;
-    if (tgUser) {
-        const telegramId = tgUser.id;
-        setBookingField("telegramId", telegramId);
-    }
+    useEffect(() => {
+        if (
+            typeof window !== "undefined" &&
+            window.Telegram?.WebApp?.initDataUnsafe?.user
+        ) {
+            const telegramId = window.Telegram.WebApp.initDataUnsafe.user.id;
+            setBookingField("telegramId", telegramId);
+        }
+    }, [setBookingField]);
 
     const handleSaveService = (id: string, service: string) => {
         setBookingField("massageId", id);
@@ -46,14 +51,13 @@ const ServiceCardOneForServiceIdPage = ({
                     <h3 className="text-lg font-semibold text-gray-800">
                         {title}
                     </h3>
-
                     <p className="text-sm text-gray-600">{description}</p>
-
                     <div className="flex items-center text-sm text-gray-500 pt-2">
                         ⏱ {duration} мин
                     </div>
                 </div>
             </div>
+
             <Link
                 onClick={() => handleSaveService(id, title)}
                 href={"/datetimeselection"}
