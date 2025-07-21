@@ -1,5 +1,5 @@
 "use client";
-
+import Script from "next/script";
 import { BookingData } from "@/types/types";
 import { BookingSummaryCard } from "@/components/checkdata/BookingSummaryCard";
 
@@ -21,9 +21,15 @@ const handleSendBooking = async (data: BookingData) => {
 };
 function CheckDataPage() {
     return (
-        <main className="flex min-h-screen flex-col items-center justify-around px-4 py-8 bg-gradient-to-b from-white to-blue-50">
-            <BookingSummaryCard handleSendBooking={handleSendBooking} />
-        </main>
+        <>
+            <Script
+                src="https://telegram.org/js/telegram-web-app.js"
+                strategy="beforeInteractive"
+            />
+            <main className="flex min-h-screen flex-col items-center justify-around px-4 py-8 bg-gradient-to-b from-white to-blue-50">
+                <BookingSummaryCard handleSendBooking={handleSendBooking} />
+            </main>
+        </>
     );
 }
 
