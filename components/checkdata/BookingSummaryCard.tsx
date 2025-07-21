@@ -1,10 +1,10 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { useBookingStore } from "@/store/bookingStore";
 import NavigationButton from "@/UIComponents/NavigationButton";
 import { BookingData } from "@/types/types";
-import WebApp from "@twa-dev/sdk";
+//import WebApp from "@twa-dev/sdk";
 
 export const BookingSummaryCard = ({
     handleSendBooking,
@@ -12,6 +12,13 @@ export const BookingSummaryCard = ({
     handleSendBooking: (data: BookingData) => void;
 }) => {
     const { massageId, massage, date, time, name, phone } = useBookingStore();
+    const webAppRef = useRef<any>(null);
+
+    useEffect(() => {
+        if (typeof window !== "undefined" && window.Telegram?.WebApp) {
+            webAppRef.current = window.Telegram.WebApp;
+        }
+    }, []);
 
     return (
         <div className="max-w-md mx-auto mt-6 rounded-2xl shadow-md p-6 bg-white">
@@ -51,12 +58,24 @@ export const BookingSummaryCard = ({
                         name,
                         phone,
                     });
-                    if (WebApp?.sendData) {
-                        WebApp.sendData(
-                            JSON.stringify({ massage, date, time, name, phone })
-                        );
+                    const payload = JSON.stringify({
+                        massage,
+                        date,
+                        time,
+                        name,
+                        phone,
+                    });
+
+                    if (webAppRef.current?.sendData) {
+                        webAppRef.current.sendData(payload);
+                        webAppRef.current.close();
                     }
-                    WebApp.close();
+                    // if (WebApp?.sendData) {
+                    //     WebApp.sendData(
+                    //         JSON.stringify({ massage, date, time, name, phone })
+                    //     );
+                    // }
+                    // WebApp.close();
                 }}
             />
         </div>
