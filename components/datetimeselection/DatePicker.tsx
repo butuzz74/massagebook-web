@@ -67,7 +67,7 @@ export default function DatePicker({ workdays }: { workdays: WorkDay[] }) {
     return (
         <div className="p-4 flex flex-col items-center">
             <h2 className="text-xl font-semibold mb-4">
-                Выберите дату: {telegramId}
+                Выберите дату: {telegramId ? telegramId : "Do not telegramId"}
             </h2>
             {availableDays ? (
                 <DayPicker
