@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useRouter } from "next/navigation";
 import { useBookingStore } from "@/store/bookingStore";
 import NavigationButton from "@/UIComponents/NavigationButton";
 import { BookingData } from "@/types/types";
@@ -10,8 +11,9 @@ export const BookingSummaryCard = ({
 }: {
     handleSendBooking: (data: BookingData) => void;
 }) => {
+    const router = useRouter();
     const { massageId, massage, date, time, name, phone } = useBookingStore();
-    console.log(massage, massageId, date, time, name, phone);
+
     return (
         <div className="max-w-md mx-auto mt-6 rounded-2xl shadow-md p-6 bg-white">
             <h2 className="text-xl font-semibold mb-4 text-gray-800">
@@ -41,7 +43,7 @@ export const BookingSummaryCard = ({
             </div>
             <NavigationButton
                 text="Отправить заказ"
-                customOnClick={() =>
+                customOnClick={() => {
                     handleSendBooking({
                         massageId,
                         massage,
@@ -49,8 +51,9 @@ export const BookingSummaryCard = ({
                         time,
                         name,
                         phone,
-                    })
-                }
+                    });
+                    router.push("/");
+                }}
             />
         </div>
     );

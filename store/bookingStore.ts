@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { BookingStore } from "../types/types";
 
 export const useBookingStore = create<BookingStore>((set) => ({
+    telegramId: undefined,
     massageId: undefined,
     massage: undefined,
     date: undefined,
@@ -12,6 +13,7 @@ export const useBookingStore = create<BookingStore>((set) => ({
         set((state) => ({ ...state, [field]: value })),
     resetBooking: () =>
         set({
+            telegramId: undefined,
             massageId: undefined,
             massage: undefined,
             date: undefined,

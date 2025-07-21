@@ -18,6 +18,12 @@ const ServiceCardOneForServiceIdPage = ({
 }) => {
     const { setBookingField } = useBookingStore();
 
+    const tgUser = window.Telegram?.WebApp?.initDataUnsafe?.user;
+    if (tgUser) {
+        const telegramId = tgUser.id;
+        setBookingField("telegramId", telegramId);
+    }
+
     const handleSaveService = (id: string, service: string) => {
         setBookingField("massageId", id);
         setBookingField("massage", service);

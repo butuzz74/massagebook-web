@@ -11,9 +11,7 @@ export default function ClientForm() {
     const [error, setError] = useState("");
 
     const router = useRouter();
-    const { setBookingField, massage, massageId, date, time } =
-        useBookingStore();
-    console.log(massage, massageId, date, time);
+    const { setBookingField } = useBookingStore();
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -23,7 +21,7 @@ export default function ClientForm() {
             return;
         }
 
-        if (!/^\+?\d{10,15}$/.test(phone)) {
+        if (!/^\+375\(\d{2}\)\d{3}-\d{2}-\d{2}$/.test(phone)) {
             setError("Введите корректный номер телефона");
             return;
         }
@@ -31,8 +29,9 @@ export default function ClientForm() {
         setError("");
         setBookingField("name", name);
         setBookingField("phone", phone);
+        router.push("/checkdata");
     };
-
+    console.log(phone);
     return (
         <form
             onSubmit={handleSubmit}
@@ -55,9 +54,9 @@ export default function ClientForm() {
             />
 
             <InputMask
-                mask="+375 (__) ___-__-__"
+                mask="+375(__)___-__-__"
                 replacement={{ _: /\d/ }}
-                placeholder="+375 (__) ___-__-__"
+                placeholder="+375(__)___-__-__"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -65,7 +64,6 @@ export default function ClientForm() {
 
             <button
                 type="submit"
-                onClick={() => router.push("/checkdata")}
                 className="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition"
             >
                 Подтвердить

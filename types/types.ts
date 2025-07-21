@@ -19,6 +19,7 @@ export type ProductsType = {
 };
 
 export type BookingData = {
+    telegramId?: number;
     massageId?: string;
     massage?: string;
     date?: string;
@@ -28,7 +29,7 @@ export type BookingData = {
 };
 
 export type BookingStore = BookingData & {
-    setBookingField: (fielt: keyof BookingData, value: string) => void;
+    setBookingField: (fielt: keyof BookingData, value: string | number) => void;
     resetBooking: () => void;
 };
 export type Slot = {
