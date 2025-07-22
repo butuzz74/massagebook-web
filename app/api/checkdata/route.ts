@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
                 workDay.slots.forEach((slot: TimeSlotS) =>
                     slot.time === String(body.time)
                         ? (slot.available = false)
-                        : (slot.available = true)
+                        : (slot.available = slot.available)
                 );
                 await workDay.save();
             }

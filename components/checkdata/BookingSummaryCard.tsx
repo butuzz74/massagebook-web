@@ -4,7 +4,6 @@ import React, { useEffect, useRef } from "react";
 import { useBookingStore } from "@/store/bookingStore";
 import NavigationButton from "@/UIComponents/NavigationButton";
 import { BookingData } from "@/types/types";
-//import WebApp from "@twa-dev/sdk";
 
 export const BookingSummaryCard = ({
     handleSendBooking,
@@ -70,12 +69,6 @@ export const BookingSummaryCard = ({
                         webAppRef.current.sendData(payload);
                         webAppRef.current.close();
                     }
-                    // if (WebApp?.sendData) {
-                    //     WebApp.sendData(
-                    //         JSON.stringify({ massage, date, time, name, phone })
-                    //     );
-                    // }
-                    // WebApp.close();
                 }}
             />
         </div>
