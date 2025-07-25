@@ -4,18 +4,20 @@ import { configForHomePage } from "../config/configForHomePage";
 import Image from "next/image";
 import NavigationButton from "@/UIComponents/NavigationButton";
 import WebApp from "@twa-dev/sdk";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useBookingStore } from "@/store/bookingStore";
 import { TelegramUserData } from "@/types/types";
 
 export default function Home() {
     const { setBookingField } = useBookingStore();
+    const webAppRef = useRef<typeof window.Telegram.WebApp | null>(null);
+
     useEffect(() => {
-        if (WebApp.initData) {
-            const telegramUserID = WebApp.initDataUnsafe
-                .user as TelegramUserData;
-            console.log(telegramUserID.id);
-            setBookingField("telegramId", telegramUserID.id);
+        if (typeof window !== "undefined" && window.Telegram?.WebApp) {
+            webAppRef.current = window.Telegram.WebApp;
+            const telegramUserID = webAppRef.current.initDataUnsafe.user?.id;
+            console.log(telegramUserID);
+            if (telegramUserID) setBookingField("telegramId", telegramUserID);
         }
     }, []);
 
