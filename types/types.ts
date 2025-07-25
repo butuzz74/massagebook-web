@@ -50,3 +50,12 @@ export type InputFormProps = {
     value: string;
     onCange: (event: ChangeEvent<HTMLInputElement>) => void;
 };
+
+export type TelegramUserData = {
+    id: number;
+    first_name?: string;
+    last_name?: string;
+    username?: string;
+    language_code: string;
+    is_premium?: boolean;
+};

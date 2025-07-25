@@ -1,8 +1,24 @@
+"use client";
+
 import { configForHomePage } from "../config/configForHomePage";
 import Image from "next/image";
 import NavigationButton from "@/UIComponents/NavigationButton";
+import WebApp from "@twa-dev/sdk";
+import { useEffect } from "react";
+import { useBookingStore } from "@/store/bookingStore";
+import { TelegramUserData } from "@/types/types";
 
 export default function Home() {
+    const { setBookingField } = useBookingStore();
+    useEffect(() => {
+        if (WebApp.initData) {
+            const telegramUserID = WebApp.initDataUnsafe
+                .user as TelegramUserData;
+            console.log(telegramUserID.id);
+            setBookingField("telegramId", telegramUserID.id);
+        }
+    }, []);
+
     return (
         <main className="flex min-h-screen flex-col items-center justify-around px-4 py-8 bg-gradient-to-b from-white to-blue-50">
             <h1 className="text-3xl font-bold text-blue-700 mb-4 text-center">

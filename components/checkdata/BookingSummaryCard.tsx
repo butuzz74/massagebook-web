@@ -20,11 +20,11 @@ export const BookingSummaryCard = ({
     }, []);
 
     return (
-        <div className="max-w-md mx-auto mt-6 rounded-2xl shadow-md p-6 bg-white">
-            <h2 className="text-xl font-semibold mb-4 text-gray-800">
+        <div className="flex flex-col items-center max-w-md mx-auto mt-6 rounded-2xl shadow-md p-6 bg-white">
+            <h2 className="text-xl font-semibold mb-8 text-gray-800">
                 Подтверждение записи
             </h2>
-            <div className="space-y-2 text-gray-700">
+            <div className="space-y-2 text-gray-700 mb-8">
                 <div>
                     <span className="font-medium">Услуга: </span>
                     <span>{massage}</span>

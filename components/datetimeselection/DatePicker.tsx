@@ -65,8 +65,8 @@ export default function DatePicker({ workdays }: { workdays: WorkDay[] }) {
     }, [selected]);
 
     return (
-        <div className="p-4 flex flex-col items-center">
-            <h2 className="text-xl font-semibold mb-4">Выберите дату:</h2>
+        <div className="p-4 flex flex-col items-center justify-around">
+            <h2 className="text-3xl font-semibold mb-10">Выберите дату:</h2>
             {availableDays ? (
                 <DayPicker
                     mode="single"

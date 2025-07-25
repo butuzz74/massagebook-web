@@ -31,7 +31,7 @@ export default function ClientForm() {
         setBookingField("phone", phone);
         router.push("/checkdata");
     };
-    console.log(phone);
+
     return (
         <form
             onSubmit={handleSubmit}
