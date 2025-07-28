@@ -3,10 +3,8 @@
 import { configForHomePage } from "../config/configForHomePage";
 import Image from "next/image";
 import NavigationButton from "@/UIComponents/NavigationButton";
-import WebApp from "@twa-dev/sdk";
 import { useEffect, useRef } from "react";
 import { useBookingStore } from "@/store/bookingStore";
-import { TelegramUserData } from "@/types/types";
 
 export default function Home() {
     const { setBookingField } = useBookingStore();
@@ -16,7 +14,6 @@ export default function Home() {
         if (typeof window !== "undefined" && window.Telegram?.WebApp) {
             webAppRef.current = window.Telegram.WebApp;
             const telegramUserID = webAppRef.current.initDataUnsafe.user?.id;
-            console.log(telegramUserID);
             if (telegramUserID) setBookingField("telegramId", telegramUserID);
         }
     }, []);

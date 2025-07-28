@@ -16,7 +16,7 @@ const ServiceCardOneForServiceIdPage = ({
     duration: number;
     id: string;
 }) => {
-    const { setBookingField } = useBookingStore();
+    const { setBookingField, telegramId } = useBookingStore();
 
     const handleSaveService = (id: string, service: string) => {
         setBookingField("massageId", id);
@@ -38,6 +38,7 @@ const ServiceCardOneForServiceIdPage = ({
 
                 <div className="p-4 space-y-2">
                     <h3 className="text-lg font-semibold text-gray-800">
+                        {telegramId ? telegramId : "TelegramId is undefined"}
                         {title}
                     </h3>
                     <p className="text-sm text-gray-600">{description}</p>
