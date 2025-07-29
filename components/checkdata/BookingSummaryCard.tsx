@@ -10,8 +10,7 @@ export const BookingSummaryCard = ({
 }: {
     handleSendBooking: (data: BookingData) => void;
 }) => {
-    const { massageId, massage, date, time, name, phone, telegramId } =
-        useBookingStore();
+    const { massageId, massage, date, time, name, phone } = useBookingStore();
     const webAppRef = useRef<typeof window.Telegram.WebApp | null>(null);
 
     useEffect(() => {
@@ -27,7 +26,7 @@ export const BookingSummaryCard = ({
             </h2>
             <div className="space-y-2 text-gray-700 mb-8">
                 <div>
-                    <span className="font-medium">Услуга: </span>
+                    <span className="font-medium">Услуга:</span>
                     <span>{massage}</span>
                 </div>
                 <div>
@@ -57,7 +56,6 @@ export const BookingSummaryCard = ({
                         time,
                         name,
                         phone,
-                        telegramId,
                     });
                     const payload = JSON.stringify({
                         massage,
@@ -65,7 +63,6 @@ export const BookingSummaryCard = ({
                         time,
                         name,
                         phone,
-                        telegramId,
                     });
 
                     if (webAppRef.current?.sendData) {
