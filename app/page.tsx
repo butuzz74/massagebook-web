@@ -8,15 +8,13 @@ import { useRef, useEffect } from "react";
 
 export default function Home() {
     const { setBookingField } = useBookingStore();
-    const webAppRef = useRef<typeof window.Telegram.WebApp | null>(null);
 
     useEffect(() => {
         if (typeof window !== "undefined" && window.Telegram?.WebApp) {
-            webAppRef.current = window.Telegram.WebApp;
-            if (webAppRef.current.initDataUnsafe.user?.id)
+            if (window.Telegram.WebApp.initDataUnsafe.user?.id)
                 setBookingField(
                     "telegramId",
-                    webAppRef.current.initDataUnsafe.user?.id
+                    window.Telegram.WebApp.initDataUnsafe.user?.id
                 );
         }
     }, []);
