@@ -56,6 +56,7 @@ export const BookingSummaryCard = ({
                         time,
                         name,
                         phone,
+                        telegramId: webAppRef.current?.initDataUnsafe.user?.id,
                     });
                     const payload = JSON.stringify({
                         massage,
