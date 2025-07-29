@@ -3,7 +3,7 @@ import { Schema, model, models } from "mongoose";
 const bookingSchema = new Schema(
     {
         massageId: { type: Schema.Types.ObjectId, ref: "Massage" },
-        telegramId: String,
+        telegramId: Number,
         massage: String,
         date: String,
         time: String,

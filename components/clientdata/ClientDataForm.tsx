@@ -11,7 +11,7 @@ export default function ClientForm() {
     const [error, setError] = useState("");
 
     const router = useRouter();
-    const { setBookingField } = useBookingStore();
+    const { setBookingField, telegramId } = useBookingStore();
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -38,7 +38,7 @@ export default function ClientForm() {
             className="max-w-md mx-auto mt-8 space-y-4 p-6 border-4 border-fuchsia-200 not-only:rounded-xl shadow bg-white"
         >
             <h2 className="text-2xl font-bold text-center">
-                Введите ваши данные
+                Введите ваши данные {String(telegramId)}
             </h2>
 
             {error && (
