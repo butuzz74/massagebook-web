@@ -4,16 +4,18 @@ import { configForHomePage } from "../config/configForHomePage";
 import { useBookingStore } from "@/store/bookingStore";
 import Image from "next/image";
 import NavigationButton from "@/UIComponents/NavigationButton";
-import { useRef, useEffect } from "react";
+import { useEffect } from "react";
 
 export default function Home() {
     const { setBookingField } = useBookingStore();
 
     useEffect(() => {
         if (typeof window !== "undefined" && window.Telegram?.WebApp) {
-            setBookingField("telegramId", 99999);
             if (window.Telegram.WebApp.initDataUnsafe.user?.id)
-                setBookingField("telegramId", 7777777);
+                setBookingField(
+                    "telegramId",
+                    window.Telegram.WebApp.initDataUnsafe.user.id
+                );
         }
     }, []);
     return (
