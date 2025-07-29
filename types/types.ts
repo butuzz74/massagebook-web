@@ -19,7 +19,7 @@ export type ProductsType = {
 };
 
 export type BookingData = {
-    telegramId?: number;
+    telegramId?: string;
     massageId?: string;
     massage?: string;
     date?: string;
