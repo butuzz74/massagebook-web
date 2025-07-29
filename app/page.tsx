@@ -11,6 +11,7 @@ export default function Home() {
 
     useEffect(() => {
         if (typeof window !== "undefined" && window.Telegram?.WebApp) {
+            setBookingField("telegramId", 99999);
             if (window.Telegram.WebApp.initDataUnsafe.user?.id)
                 setBookingField("telegramId", 7777777);
         }
