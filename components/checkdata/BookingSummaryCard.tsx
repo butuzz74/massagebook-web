@@ -22,7 +22,8 @@ export const BookingSummaryCard = ({
     return (
         <div className="flex flex-col items-center max-w-md mx-auto mt-6 rounded-2xl shadow-md p-6 bg-white">
             <h2 className="text-xl font-semibold mb-8 text-gray-800">
-                Подтверждение записи
+                Подтверждение записи{" "}
+                {webAppRef.current?.initDataUnsafe.user?.id}
             </h2>
             <div className="space-y-2 text-gray-700 mb-8">
                 <div>
