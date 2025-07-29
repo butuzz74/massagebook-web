@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useBookingStore } from "@/store/bookingStore";
 import NavigationButton from "@/UIComponents/NavigationButton";
 import { BookingData } from "@/types/types";
@@ -12,18 +12,19 @@ export const BookingSummaryCard = ({
 }) => {
     const { massageId, massage, date, time, name, phone } = useBookingStore();
     const webAppRef = useRef<typeof window.Telegram.WebApp | null>(null);
+    const [telegramId, setTelegramId] = useState<number>();
 
     useEffect(() => {
         if (typeof window !== "undefined" && window.Telegram?.WebApp) {
             webAppRef.current = window.Telegram.WebApp;
+            setTelegramId(webAppRef.current.initDataUnsafe.user?.id);
         }
     }, []);
 
     return (
         <div className="flex flex-col items-center max-w-md mx-auto mt-6 rounded-2xl shadow-md p-6 bg-white">
             <h2 className="text-xl font-semibold mb-8 text-gray-800">
-                Подтверждение записи{" "}
-                {webAppRef.current?.initDataUnsafe.user?.id}
+                Подтверждение записи {telegramId}
             </h2>
             <div className="space-y-2 text-gray-700 mb-8">
                 <div>
@@ -57,7 +58,7 @@ export const BookingSummaryCard = ({
                         time,
                         name,
                         phone,
-                        telegramId: "000000",
+                        telegramId: String(telegramId),
                     });
                     const payload = JSON.stringify({
                         massage,
