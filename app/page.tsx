@@ -5,17 +5,25 @@ import { useBookingStore } from "@/store/bookingStore";
 import Image from "next/image";
 import NavigationButton from "@/UIComponents/NavigationButton";
 import { useEffect } from "react";
+import WebApp from "@twa-dev/sdk";
+import { TelegramUserData } from "@/types/types";
 
 export default function Home() {
     const { setBookingField } = useBookingStore();
 
+    // useEffect(() => {
+    //     if (typeof window !== "undefined" && window.Telegram?.WebApp) {
+    //         if (window.Telegram.WebApp.initDataUnsafe.user?.id)
+    //             setBookingField(
+    //                 "telegramId",
+    //                 window.Telegram.WebApp.initDataUnsafe.user.id
+    //             );
+    //     }
+    // }, []);
+
     useEffect(() => {
-        if (typeof window !== "undefined" && window.Telegram?.WebApp) {
-            if (window.Telegram.WebApp.initDataUnsafe.user?.id)
-                setBookingField(
-                    "telegramId",
-                    window.Telegram.WebApp.initDataUnsafe.user.id
-                );
+        if (WebApp.initDataUnsafe.user) {
+            setBookingField("telegramId", WebApp.initDataUnsafe.user.id);
         }
     }, []);
     return (
