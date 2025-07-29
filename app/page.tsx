@@ -22,8 +22,9 @@ export default function Home() {
     // }, []);
 
     useEffect(() => {
-        if (WebApp.initDataUnsafe.user) {
-            setBookingField("telegramId", WebApp.initDataUnsafe.user.id);
+        if (typeof window !== "undefined" && window.Telegram?.WebApp) {
+            if (WebApp.initDataUnsafe.user)
+                setBookingField("telegramId", WebApp.initDataUnsafe.user.id);
         }
     }, []);
     return (
