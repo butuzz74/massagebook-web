@@ -76,8 +76,10 @@ export const BookingSummaryCard = ({
                         typeof window !== "undefined" &&
                         window.Telegram?.WebApp
                     ) {
-                        WebApp.sendData(payload);
-                        WebApp.close();
+                        window.Telegram.WebApp.sendData(
+                            JSON.stringify({ action: "submit" })
+                        );
+                        window.Telegram.WebApp.close();
                     }
                 }}
             />
