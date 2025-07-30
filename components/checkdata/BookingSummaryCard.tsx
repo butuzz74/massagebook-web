@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from "react";
 import { useBookingStore } from "@/store/bookingStore";
 import NavigationButton from "@/UIComponents/NavigationButton";
 import { BookingData } from "@/types/types";
+import WebApp from "@twa-dev/sdk";
 
 export const BookingSummaryCard = ({
     handleSendBooking,
@@ -12,13 +13,13 @@ export const BookingSummaryCard = ({
 }) => {
     const { massageId, massage, date, time, name, phone, telegramId } =
         useBookingStore();
-    const webAppRef = useRef<typeof window.Telegram.WebApp | null>(null);
+    //const webAppRef = useRef<typeof window.Telegram.WebApp | null>(null);
 
-    useEffect(() => {
-        if (typeof window !== "undefined" && window.Telegram?.WebApp) {
-            webAppRef.current = window.Telegram.WebApp;
-        }
-    }, []);
+    // useEffect(() => {
+    //     if (typeof window !== "undefined" && window.Telegram?.WebApp) {
+    //         webAppRef.current = window.Telegram.WebApp;
+    //     }
+    // }, []);
 
     return (
         <div className="flex flex-col items-center max-w-md mx-auto mt-6 rounded-2xl shadow-md p-6 bg-white">
@@ -67,9 +68,16 @@ export const BookingSummaryCard = ({
                         phone,
                     });
 
-                    if (webAppRef.current?.sendData) {
-                        webAppRef.current.sendData(payload);
-                        webAppRef.current.close();
+                    // if (webAppRef.current?.sendData) {
+                    //     webAppRef.current.sendData(payload);
+                    //     webAppRef.current.close();
+                    // }
+                    if (
+                        typeof window !== "undefined" &&
+                        window.Telegram?.WebApp
+                    ) {
+                        WebApp.sendData(payload);
+                        WebApp.close();
                     }
                 }}
             />
