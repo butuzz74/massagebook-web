@@ -29,8 +29,7 @@ const handleSendBotBooking = async (data: BookingData) => {
         });
 
         if (!res.ok) throw new Error("Ошибка при бронировании");
-        if (typeof window !== "undefined" && window.Telegram?.WebApp)
-            window.Telegram.WebApp.close();
+        return "Success";
     } catch (err) {
         console.error(err);
     }

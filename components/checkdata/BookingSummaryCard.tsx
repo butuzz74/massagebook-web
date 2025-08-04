@@ -10,7 +10,7 @@ export const BookingSummaryCard = ({
     handleSendBotBooking,
 }: {
     handleSendBooking: (data: BookingData) => void;
-    handleSendBotBooking: (data: BookingData) => void;
+    handleSendBotBooking: (data: BookingData) => Promise<"Success" | undefined>;
 }) => {
     const { massageId, massage, date, time, name, phone, telegramId } =
         useBookingStore();
@@ -22,7 +22,7 @@ export const BookingSummaryCard = ({
             </h2>
             <div className="space-y-2 text-gray-700 mb-8">
                 <div>
-                    <span className="font-medium">Услуга:</span>
+                    <span className="font-medium">Услуга: </span>
                     <span>{massage}</span>
                 </div>
                 <div>
@@ -44,7 +44,7 @@ export const BookingSummaryCard = ({
             </div>
             <NavigationButton
                 text="Отправить заказ"
-                customOnClick={() => {
+                customOnClick={async () => {
                     handleSendBooking({
                         massageId,
                         massage,
@@ -54,7 +54,7 @@ export const BookingSummaryCard = ({
                         phone,
                         telegramId,
                     });
-                    handleSendBotBooking({
+                    await handleSendBotBooking({
                         massage,
                         date,
                         time,
@@ -62,6 +62,11 @@ export const BookingSummaryCard = ({
                         phone,
                         telegramId,
                     });
+                    if (
+                        typeof window !== "undefined" &&
+                        window.Telegram?.WebApp
+                    )
+                        window.Telegram.WebApp.close();
                 }}
             />
         </div>
