@@ -62,6 +62,12 @@ export const BookingSummaryCard = ({
                         phone,
                         telegramId,
                     });
+                    if (
+                        typeof window !== "undefined" &&
+                        window.Telegram?.WebApp
+                    ) {
+                        window.Telegram?.WebApp.close();
+                    }
                 }}
             />
         </div>
