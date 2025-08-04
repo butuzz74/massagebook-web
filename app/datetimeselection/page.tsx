@@ -8,7 +8,6 @@ async function DataTimeSelectionPage() {
     );
 
     const workdays: WorkDay[] = await data.json();
-    const availableDays = workdays.map((elem) => new Date(elem.date));
 
     return (
         <main className="flex min-h-screen flex-col items-center justify-around px-4 py-8 bg-gradient-to-b from-white to-blue-50">
